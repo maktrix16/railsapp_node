@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Survey Form</title>
+<style type="text/css">
+	body {
+    	margin: 0;
+    	padding: 0;
+    	text-align: center;
+    	font-family: arial;
+	}
+	h1{font-weight: normal;}
+	#epic-btn{
+		background-color:blue; color:white; border-radius: 20px; border:none;
+		height:80px; width: 220px; font-size: 20px;
+	}
+	#reset-btn{
+		background-color:red; color:white; border:none;
+		height:20px; width: 100px; font-weight: bold;	
+		display:block; margin:60px 0px 0px 550px;	
+	}
+
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type ="text/javascript">
+    $(document).ready(function (){
+        var socket = io.connect();
+        $('#epic-btn').click(function(){
+        	socket.emit("add_count");
+        });
+        $('#reset-btn').click(function(){
+        	socket.emit("reset_count");
+        });
+        socket.on('update_count',function(data){
+        	$('#count').html(data);
+        });
+    });
+
+</script>
+</head>
+<body>
+	<div id='container'>
+		<h1>The button has been pushed <span id="count">0</span> times(s)</h1>
+		<p>Push the button to update the count!</p>
+		<button id='epic-btn'>Push the epic button</button>
+		<button id='reset-btn'>Reset count</button>
+	</div>
+
+</body>
+</html>
