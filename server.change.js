@@ -12,9 +12,7 @@ var app=express();
 // 	res.render('index');
 // });
 
-var server = app.listen(8001,function(){
-	console.log('listening to port 8001');
-});
+var server = app.listen(8001,"52.0.241.198");
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection',function(socket){
